@@ -1,17 +1,13 @@
-# Groupthink for Hubitat
+# Single Active Switch for Hubitat
 
-Hubitat exposes multiple ways to create group devices, primarily Room Lighting
-and its predecessor Groups and Scenes. When a group device is triggered, the
-underlying real devices don't always respond on the first attempt. However,
-since the group appears to be on, subsequent executions of rules frequently
-don't send a fresh activation signal.
+Inspired by [this
+thread](https://community.hubitat.com/t/simple-rule-machine-rule-controlling-multiple-switches/123845),
+this is a port of a driver used in [Palette
+Scenes](https://community.hubitat.com/t/beta-palette-scenes/106335)
+to a stand-alone app.
 
-This app monitors the `groupState` property optionally exposed by a group
-device; when a group is turned on or off, if the `groupState` doesn't update to
-reflect the desired change within a configurable number of seconds, it resends
-the indicated state multiple times.
-
-Better late than never.
+It's very simple -- select multiple switches, and only one of them can be on
+at once. If one turns on, the others get turned off.
 
 # Change Log
 
