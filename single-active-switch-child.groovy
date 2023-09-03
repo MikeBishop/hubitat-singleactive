@@ -4,7 +4,8 @@
 */
 
 definition (
-    name: "Single Active Switch", namespace: "evequefou", author: "Mike Bishop", description: "Allows at most one switch to be on",
+    parent: "evequefou:Single Active Switch",
+    name: "Single Active Switch Child", namespace: "evequefou", author: "Mike Bishop", description: "Allows at most one switch to be on",
     importUrl: "https://raw.githubusercontent.com/MikeBishop/hubitat-singleactive/main/single-active-switch.groovy",
     category: "Lighting",
     iconUrl: "",
