@@ -20,6 +20,9 @@ Map mainPage() {
     dynamicPage(name: "mainPage", title: "Single Active Switch", install: true, uninstall: true) {
         initialize();
         section() {
+            input "thisName", "text", title: "Name this instance", submitOnChange: true
+            if(thisName) app.updateLabel("$thisName")
+            
             paragraph "At most one selected switch can be on at once. If one switch turns on, the others turn off."
         }
         section() {
