@@ -63,7 +63,7 @@ def mainPage() {
                     "You can create as many instances as you need to cover all of your devices."
             }
   			section("<b>Single-Active Groups:</b>") {
-				app(name: "anyOpenApp", appName: "Single Active Switch", namespace: "evequefou", title: "<b>Create a new single-active group</b>", multiple: true)
+				app(name: "anyOpenApp", appName: "Single Active Switch Child", namespace: "evequefou", title: "<b>Create a new single-active group</b>", multiple: true)
 			}
 		}
 	}
