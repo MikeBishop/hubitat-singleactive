@@ -49,6 +49,9 @@ void switchOn(event) {
     def eventDNI = event.device.getDeviceNetworkId();
     monitored.each { switchDevice ->
         if( switchDevice.getDeviceNetworkId() != eventDNI ) {
+            if( debugSpew && switchDevice.currentValue("switch") == "on" ) {
+                log.debug("switchOn: Turning ${switchDevice} off");
+            }
             switchDevice.off();
         }
     }
