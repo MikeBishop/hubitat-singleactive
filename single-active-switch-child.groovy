@@ -6,7 +6,7 @@
 definition (
     parent: "evequefou:Single Active Switch",
     name: "Single Active Switch Child", namespace: "evequefou", author: "Mike Bishop", description: "Allows at most one switch to be on",
-    importUrl: "https://raw.githubusercontent.com/MikeBishop/hubitat-singleactive/main/single-active-switch.groovy",
+    importUrl: "https://raw.githubusercontent.com/MikeBishop/hubitat-singleactive/main/single-active-switch-child.groovy",
     category: "Lighting",
     iconUrl: "",
     iconX2Url: ""
@@ -22,7 +22,7 @@ Map mainPage() {
         section() {
             input "thisName", "text", title: "Name this instance", submitOnChange: true
             if(thisName) app.updateLabel("$thisName")
-            
+
             paragraph "At most one selected switch can be on at once. If one switch turns on, the others turn off."
         }
         section() {
