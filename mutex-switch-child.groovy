@@ -4,7 +4,7 @@
 */
 
 definition (
-    parent: "evequefou:Mutex Switches",
+    parent: "evequefou:Single Active Switch",
     name: "Mutex Switch Child", namespace: "evequefou", author: "Mike Bishop", description: "Collection of virtual switches, at most one can be on",
     importUrl: "https://raw.githubusercontent.com/MikeBishop/hubitat-singleactive/main/mutex-switch-child.groovy",
     category: "Lighting",

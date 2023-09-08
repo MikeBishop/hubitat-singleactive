@@ -58,13 +58,17 @@ def mainPage() {
     		section{paragraph "Please hit 'Done' to install '${app.label}' parent app "}
   	    }
         else {
-			section() {
-				paragraph "Each child instance can be configured to make a specific set of devices mutually exclusive. " +
-                    "You can create as many instances as you need to cover all of your devices."
-            }
-  			section("<b>Single-Active Groups:</b>") {
-				app(name: "anyOpenApp", appName: "Single Active Switch Child", namespace: "evequefou", title: "<b>Create a new single-active group</b>", multiple: true)
+  			section("<b>Existing Devices</b>") {
+				paragraph "Each child instance can be configured to make a specific set of existing devices mutually exclusive. " +
+                    "You can create as many instances as you need to cover sets of devices which should not be active simultaneously."
+				app(name: "anyOpenApp", appName: "Single Active Switch Child", namespace: "evequefou", title: "<b>Create a new group of existing devices</b>", multiple: true)
 			}
+  			section("<b>Virtual Switches:</b>") {
+                paragraph "Each child instance manages a set of mutually exclusive virtual switches. " +
+                    "You can create as many instances as you need to cover different states, similar to Modes."
+				app(name: "anyOpenApp", appName: "Mutex Switch Child", namespace: "evequefou", title: "<b>Create a new group of virtual switches</b>", multiple: true)
+			}
+
 		}
 	}
 }
