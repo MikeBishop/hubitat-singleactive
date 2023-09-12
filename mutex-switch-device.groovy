@@ -6,6 +6,8 @@
 metadata {
     definition (name: "Mutex Switch", namespace: "evequefou", author: "Mike Bishop") {
         command "allOff"
+        attribute "activeSwitch", "string"
+        attribute "previousActiveSwitch", "string"
     }
     preferences {
         input name: "debugSpew", type: "bool", title: "Enable debug logging", defaultValue: false
@@ -30,12 +32,14 @@ def fetchChildren() {
 
 //child device methods
 void componentOn(cd){
-    if (debugSpew) log.info "received on request from ${cd}"
+    debug "received on request from ${cd}"
     def targetId = cd.getDeviceNetworkId();
     def childDevices = getChildDevices();
-    childDevices.find { it.getDeviceNetworkId() == targetId }.parse([[name:"switch", value:"on", descriptionText:"turned on"]]);
+    def switchOn = childDevices.find { it.getDeviceNetworkId() == targetId };
+    switchOn.parse([[name:"switch", value:"on", descriptionText:"turned on"]]);
+    updateCurrent(switchOn);
     childDevices.each {
-        if( targetId != it.getDeviceNetworkId() && device.currentValue("switch") == "on" ) {
+        if( targetId != it.getDeviceNetworkId() && it.currentValue("switch") == "on" ) {
             it.parse([[name:"switch", value: "off", descriptionText:"turned off when ${cd} was turned on"]]);
         }
     }
@@ -45,6 +49,15 @@ void componentOff(cd){
     if (debugSpew) log.debug "received off request from ${cd}"
     def child = getChildDevice(cd.getDeviceNetworkId());
     child.parse([[name:"switch", value:"off", descriptionText:"${cd} was turned off"]])
+    if (getChildDevices().every { it.currentValue("switch") == "off" }) {
+        updateCurrent();
+    }
+}
+
+void updateCurrent(child = null) {
+    debug "updating current switch to ${child}"
+    sendEvent([name:"previousActiveSwitch", value: device.currentValue("activeSwitch") ?: "none"]);
+    sendEvent([name:"activeSwitch", value: "${child ?: "none"}"]);
 }
 
 void allOff() {
@@ -57,3 +70,7 @@ void allOff() {
 }
 
 void componentRefresh(cd) { }
+
+void debug(msg) {
+    if (debugSpew) log.debug msg
+}
