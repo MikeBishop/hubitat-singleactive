@@ -36,13 +36,13 @@ void componentOn(cd){
     def targetId = cd.getDeviceNetworkId();
     def childDevices = getChildDevices();
     def switchOn = childDevices.find { it.getDeviceNetworkId() == targetId };
-    switchOn.parse([[name:"switch", value:"on", descriptionText:"turned on"]]);
-    updateCurrent(switchOn);
     childDevices.each {
         if( targetId != it.getDeviceNetworkId() && it.currentValue("switch") == "on" ) {
             it.parse([[name:"switch", value: "off", descriptionText:"turned off when ${cd} was turned on"]]);
         }
     }
+    switchOn.parse([[name:"switch", value:"on", descriptionText:"turned on"]]);
+    updateCurrent(switchOn);
 }
 
 void componentOff(cd){
